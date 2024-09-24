@@ -2,10 +2,10 @@ from exceptions import NegativeTitlesError, InvalidYearCupError, ImpossibleTitle
 from datetime import datetime
 
 
-def data_processing(team: dict):
-    team_titles = team['titles']
+def data_processing(**team: dict):
+    team_titles = team["titles"]
 
-    first_cup_str = team['first_cup']
+    first_cup_str = team["first_cup"]
     first_cup_date = datetime.strptime(first_cup_str, "%Y-%m-%d")
     first_cup_year = first_cup_date.year
     last_cup_year = 2022
@@ -19,19 +19,22 @@ def data_processing(team: dict):
 
 
 def validate_titles(titles: int):
-        if titles < 0:
-            raise NegativeTitlesError("titles cannot be negative")
+    if titles < 0:
+        raise NegativeTitlesError("titles cannot be negative")
 
 
 def validate_cup_year(year: int):
-        if (year - 1930) % 4 != 0 or year < 1930:
-            raise InvalidYearCupError("there was no world cup this year")
-        
+    if (year - 1930) % 4 != 0 or year < 1930:
+        raise InvalidYearCupError("there was no world cup this year")
 
-def validate_titles_number(titles: int, possible_cups: int, first_cup_year:int, last_cup_year: int):    
+
+def validate_titles_number(
+    titles: int, possible_cups: int, first_cup_year: int, last_cup_year: int
+):
     if titles > possible_cups:
         if first_cup_year == last_cup_year and titles == 1:
             pass
         else:
-            raise ImpossibleTitlesError("impossible to have more titles than disputed cups")
-
+            raise ImpossibleTitlesError(
+                "impossible to have more titles than disputed cups"
+            )
