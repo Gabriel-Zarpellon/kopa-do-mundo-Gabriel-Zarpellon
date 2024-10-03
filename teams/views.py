@@ -12,7 +12,7 @@ from utils import (
 class TeamView(APIView):
     def post(self, request: Request) -> Response:
         try:
-            data_processing(**request.data)
+            data_processing(request.data)
         except NegativeTitlesError:
             return Response(
                 {"error": "titles cannot be negative"},

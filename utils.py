@@ -2,7 +2,7 @@ from exceptions import NegativeTitlesError, InvalidYearCupError, ImpossibleTitle
 from datetime import datetime
 
 
-def data_processing(**team: dict):
+def data_processing(team: dict):
     team_titles = team["titles"]
 
     first_cup_str = team["first_cup"]
